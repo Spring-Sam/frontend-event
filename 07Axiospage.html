@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios({
+            method:'get',
+            url:'http://localhost:8080/article/getAll',
+        }).then(result=>{
+            //result代表服务器响应的所有数据，包含响应头，result.data代表接口的核心数据
+            console.log(result.data)
+
+        }).catch(err=>{
+            console.log(err)
+        })
+
+
+        let article={
+            title:'明天会更好',
+            category: '生活',
+            time:'2002-10-1',
+            state: '已发布'
+        }
+
+        axios({
+            method:'post',
+            url:'http://localhost:8080/article/add',
+            data: article
+        }).then(result=>{
+            //result代表服务器响应的所有数据，包含响应头，result.data代表接口的核心数据
+            console.log(result.data)
+
+        }).catch(err=>{
+            console.log(err)
+        })
+
+        //别名的方式发送 get 请求
+        axios.get('http://localhost:8080/article/getAll').then(result=>{
+            //result代表服务器响应的所有数据，包含响应头，result.data代表接口的核心数据
+            console.log(result.data)
+
+        }).catch(err=>{
+            console.log(err)
+        })
+
+        //别名的方式发送 post 请求
+        axios.post('http://localhost:8080/article/add',article).then(result=>{
+        //result代表服务器响应的所有数据，包含响应头，result.data代表接口的核心数据
+        console.log(result.data)
+
+        }).catch(err=>{
+            console.log(err)
+        })
+
+    </script>
+
+
+
+    <div id="app">
+        <h1>{{msg}}</h1>
+    </div>
+
+    <script type="module">
+        //注意我们使用了 <script type="module">，且导入的 CDN URL 指向的是 Vue 的 ES 模块构建版本。
+        import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+        //创建vue的应用实例
+        createApp({
+            data(){
+                return {
+                    //定义数据
+                    msg: 'hello fuck'
+                }
+            }    
+
+
+        }).mount("#app")
+
+
+    </script>
+
+</body>
+
+</html>
